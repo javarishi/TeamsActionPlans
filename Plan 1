@@ -1,0 +1,91 @@
+Great, let's outline the development plan based on your requirements:
+
+## Development Plan
+
+### 1. Plugin Setup and Configuration
+- **Microsoft Teams SDK:** Set up the development environment using Microsoft Teams SDK.
+- **App Registration:** Register the application in Azure AD to get the necessary permissions for accessing meeting transcripts.
+
+### 2. Transcript Retrieval
+- **Microsoft Graph API:** Use Microsoft Graph API to fetch the meeting transcript once the meeting ends.
+
+### 3. Integration with GPT-4 using Langchain
+- **Langchain Framework:** Set up Langchain to interact with the GPT-4 model.
+- **API Integration:** Develop the backend logic to send the transcript to GPT-4 and receive the processed output.
+
+### 4. Processing Output
+- **Minutes of Meetings (MoM):** Extract the summary of the meeting.
+- **Action Items:** Identify and extract action items with the names mentioned.
+
+### 5. Output Formatting
+- **Bulleted List:** Format the output as a bulleted list for both MoM and action items.
+
+### 6. Deployment
+- **Internal Deployment:** Deploy the plugin within your organization using the Teams App Store.
+
+## Implementation Steps
+
+### Step 1: Setup Microsoft Teams Plugin
+
+1. **Create the Teams App Manifest:**
+    - Define your app's metadata in the `manifest.json` file.
+
+2. **Development Environment:**
+    - Use tools like Teams Toolkit for Visual Studio Code to create and manage your Teams app.
+
+### Step 2: Fetch Meeting Transcripts
+
+1. **Register the App in Azure AD:**
+    - Obtain the necessary permissions to access the Microsoft Graph API.
+
+2. **Graph API Integration:**
+    - Use the Graph API to fetch the transcript of a completed meeting.
+    - Example API endpoint: `GET /teams/{team-id}/channels/{channel-id}/messages/{message-id}/transcript`
+
+### Step 3: Integrate with GPT-4 using Langchain
+
+1. **Setup Langchain:**
+    - Install and configure the Langchain framework in your backend service.
+
+2. **API Call to GPT-4:**
+    - Send the transcript to GPT-4 using Langchain and handle the response.
+    - Example code snippet (Python):
+
+    ```python
+    from langchain import GPT4, prompt
+
+    def get_meeting_summary(transcript):
+        gpt4 = GPT4(api_key="your-api-key")
+        prompt_text = f"Summarize the following meeting transcript and list action items:\n\n{transcript}"
+        response = gpt4.generate(prompt=prompt_text)
+        return response['summary'], response['action_items']
+    ```
+
+### Step 4: Process and Format Output
+
+1. **Extract Summary and Action Items:**
+    - Parse the response from GPT-4 to separate the summary and action items.
+    - Format them as bulleted lists.
+
+### Step 5: Deploy the Plugin
+
+1. **Internal Deployment:**
+    - Package your app and upload it to your organization's Teams App Store.
+    - Ensure it's accessible and test its functionality within the internal environment.
+
+## Next Steps
+
+1. **Development Environment Setup:**
+    - Set up the Teams SDK and configure your development environment.
+
+2. **Azure AD Registration:**
+    - Register your app in Azure AD and obtain the necessary API permissions.
+
+3. **Develop and Test:**
+    - Implement the transcript retrieval and GPT-4 integration.
+    - Test the complete workflow from transcript generation to output formatting.
+
+4. **Deploy Internally:**
+    - Package and deploy the plugin within your organization.
+
+Let me know if you need any further details or if you're ready to start with the implementation steps!
